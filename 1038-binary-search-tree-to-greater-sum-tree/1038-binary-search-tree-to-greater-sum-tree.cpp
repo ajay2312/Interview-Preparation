@@ -29,14 +29,14 @@ public:
     }
     
     TreeNode* bstToGst(TreeNode* root) {
-        vector<int> a(101,0),b(101);
+        vector<int> a(101,0);
         inorder(root,a);
-        b[100]=a[100];
+        a[100]=a[100];
         // for(int i=0;i<=100;i++)
         //     cout<<a[i]<<" ";
         for(int i=99;i>=0;i--)
-            b[i]=a[i]+b[i+1];
-        preorder(root,b);
+            a[i]=a[i]+a[i+1];
+        preorder(root,a);
         return root;
     }
 };
