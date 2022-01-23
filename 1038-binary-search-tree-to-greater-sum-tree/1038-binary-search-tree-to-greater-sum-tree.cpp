@@ -12,31 +12,19 @@
 class Solution {
 public:
     
-    void inorder(TreeNode *root,vector<int> &a){
+    void check(TreeNode *root,int &value){
         if(root==NULL)
             return;
-        inorder(root->left,a);
-        a[root->val]=root->val;
-        inorder(root->right,a);
-    }
-    
-    void preorder(TreeNode *root,vector<int> b){
-        if(root==NULL)
-            return;
-        root->val=b[root->val];
-        preorder(root->left,b);
-        preorder(root->right,b);
+        check(root->right,value);
+        root->val+=value;
+        value=root->val;
+        check(root->left,value);
+        return;
     }
     
     TreeNode* bstToGst(TreeNode* root) {
-        vector<int> a(101,0);
-        inorder(root,a);
-        a[100]=a[100];
-        // for(int i=0;i<=100;i++)
-        //     cout<<a[i]<<" ";
-        for(int i=99;i>=0;i--)
-            a[i]=a[i]+a[i+1];
-        preorder(root,a);
+        int x=0;
+        check(root,x);
         return root;
     }
 };
